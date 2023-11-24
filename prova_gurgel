@@ -39,4 +39,11 @@ WHERE id = 500; -- Substitua pelo seu número de chamada, se necessário
 SELECT id, nome from pessoa where nome = 'GABRIEL UCHOA GURGEL'; -- Substitua pelo seu número de chamada
 
 
+SELECT ur.id, ur.unidade, p.id AS pessoa_id, p.nome AS pessoa_nome
+FROM unidade_requisitante ur
+INNER JOIN pessoa p ON ur.fk_pessoa = p.id
+WHERE p.id in (3, 300, 3000);
+
+
+
 
