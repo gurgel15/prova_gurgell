@@ -1,0 +1,42 @@
+create database prova_gabriel;
+
+USE prova_gabriel;
+
+CREATE TABLE pessoa (
+	id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nome varchar(4000) NOT NULL
+    );
+    
+    
+    SET SQL_MODE="";
+    SET SQL_MODE ='STRICT_ALL_TABLES';
+    select count(*) from pessoa ; 
+    
+    SELECT id, nome, COUNT(*) AS quantidade FROM pessoa WHERE id = 5;
+    
+    SELECT nome, COUNT(*) AS quantidade
+FROM pessoa 
+WHERE nome = (
+    SELECT nome
+    FROM pessoa
+    WHERE id = 5 -- Substitua pelo seu número de chamada
+)
+AND id != 5; -- Substitua pelo seu número de chamada
+
+UPDATE pessoa
+SET nome = 'GABRIEL UCHOA GURGEL'
+WHERE id = 5; -- Substitua pelo seu número de chamada, se necessário
+
+UPDATE pessoa
+SET nome = 'GABRIEL UCHOA GURGEL'
+WHERE id = 50; -- Substitua pelo seu número de chamada, se necessário
+
+UPDATE pessoa
+SET nome = 'GABRIEL UCHOA GURGEL'
+WHERE id = 500; -- Substitua pelo seu número de chamada, se necessário
+
+
+SELECT id, nome from pessoa where nome = 'GABRIEL UCHOA GURGEL'; -- Substitua pelo seu número de chamada
+
+
+
