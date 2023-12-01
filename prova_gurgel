@@ -1,49 +1,52 @@
-create database prova_gabriel;
+create database prova_gurgel;
+USE prova_gurgel;
 
-USE prova_gabriel;
+CREATE TABLE pessoa(
+id int(11) PRIMARY KEY NOT NULL auto_increment,
+    nome VARCHAR(4000)not null
+);
 
-CREATE TABLE pessoa (
-	id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    nome varchar(4000) NOT NULL
-    );
-    
-    
-    SET SQL_MODE="";
-    SET SQL_MODE ='STRICT_ALL_TABLES';
-    select count(*) from pessoa ; 
-    
-    SELECT id, nome, COUNT(*) AS quantidade FROM pessoa WHERE id = 5;
-    
-    SELECT nome, COUNT(*) AS quantidade
-FROM pessoa 
-WHERE nome = (
-    SELECT nome
-    FROM pessoa
-    WHERE id = 5 -- Substitua pelo seu número de chamada
-)
-AND id != 5; -- Substitua pelo seu número de chamada
+CREATE TABLE unidade_requisitante (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  unidade VARCHAR(500) NOT NULL UNIQUE
+);
 
-UPDATE pessoa
-SET nome = 'GABRIEL UCHOA GURGEL'
-WHERE id = 5; -- Substitua pelo seu número de chamada, se necessário
+alter table unidade_requisitante add column fk_pessoa int(11);
 
-UPDATE pessoa
-SET nome = 'GABRIEL UCHOA GURGEL'
-WHERE id = 50; -- Substitua pelo seu número de chamada, se necessário
-
-UPDATE pessoa
-SET nome = 'GABRIEL UCHOA GURGEL'
-WHERE id = 500; -- Substitua pelo seu número de chamada, se necessário
+alter table unidade_requisitante add constraint id_fk_pessoa
+foreign key(id) references pessoa (id);
 
 
-SELECT id, nome from pessoa where nome = 'GABRIEL UCHOA GURGEL'; -- Substitua pelo seu número de chamada
 
+ 
+SET SQL_MODE="";
+SET SQL_MODE='STRICT_ALL_TABLES';
+
+select count(*) FROM pessoa;
+select count(*) FROM unidade_requisitante;
+
+select * from pessoa where id= 5;
+
+select count(*) from pessoa where nome like 'RUBENS MARIBONDO DO NASCIMENTO';
+
+UPDATE pessoa set nome = 'gabriel uchoa gurgel' where id = 5;
+
+UPDATE pessoa set nome = 'gabriel uchoa gurgel' where id = 50;
+
+UPDATE pessoa set nome = 'gabriel uchoa gurgel' where id = 500;
+
+
+
+
+select count(*) from pessoa;
+select count(*) FROM unidade_requisitante;
+
+select p.id, p.nome, ur.fk_pessoa, ur.id, ur.unidade from pessoa p
+inner join unidade_requisitante ur
+on p.id = ur.fk_pessoa limit 100;
 
 SELECT ur.id, ur.unidade, p.id AS pessoa_id, p.nome AS pessoa_nome
 FROM unidade_requisitante ur
 INNER JOIN pessoa p ON ur.fk_pessoa = p.id
-WHERE p.id in (3, 300, 3000);
-
-
-
+WHERE p.id in (5, 500, 5000);
 
